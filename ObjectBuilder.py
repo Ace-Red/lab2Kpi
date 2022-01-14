@@ -89,7 +89,7 @@ class OwnObjectBuilder(ObjectBuilder):
         return model
 
     def extract_from_source(self) -> None:
-        self.model.set(self._model.select_all_db_data())
+        self._model.set(self._model.select_all_db_data())
 
     def reformat(self) -> None:
         my_list = []

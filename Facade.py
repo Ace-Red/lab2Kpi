@@ -1,7 +1,5 @@
-
 from flask_restful import Resource, Api, reqparse
 from ObjectBuilder import Director, OwnObjectBuilder, Provider1ObjectBuilder, Provider2ObjectBuilder, OwnModel
-
 
 
 class Facade:
