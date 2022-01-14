@@ -94,9 +94,10 @@ class OwnObjectBuilder(ObjectBuilder):
     def reformat(self) -> None:
         my_list = []
         for row in self.model.models:
-            a = {"ticket_id": row[0], "seat_number": str(row[1]), "purchase_date": str(row[2]), "user_id": str(row[3]),
-                 "flight_id": str(row[4]), "ticket_type": str(row[5]), "price": str(row[6]),
-                 "is_active": str(row[7])
+            a = {"ticket_id": row[0], "seat_number": row[1], "purchase_date": str(row[2]), "user_id": row[3],
+                 "flight_id": row[4], "departure_time": str(row[5]), "origin": str(row[6]),
+                 "destination": str(row[7]), "ticket_type": str(row[8]), "price": row[9],
+                 "is_active": str(row[10])
                  }
             my_list.append(a)
         self._model.set(my_list)
@@ -148,7 +149,7 @@ class OwnModel:
         rows = []
         with self.conn.cursor() as cursor:
             cursor.execute(
-                'SELECT "FlightLabKpi".public."public.Ticket".ticket_id, "FlightLabKpi".public."public.Ticket"."seat_number", "FlightLabKpi".public."public.Ticket"."purchase_date", "FlightLabKpi".public."public.Ticket"."ticket_type", "FlightLabKpi".public."public.Ticket"."price", "FlightLabKpi".public."public.Ticket"."is_active", "FlightLabKpi".public."public.Ticket"."user_id", "FlightLabKpi".public."public.Ticket"."flight_id","FlightLabKpi".public."public.Flight"."departure_time","FlightLabKpi".public."public.Flight"."origin","FlightLabKpi".public."public.Flight"."destination" FROM "FlightLabKpi".public."public.Ticket" INNER JOIN "FlightLabKpi".public."public.Flight" ON "FlightLabKpi".public."public.Flight"."flight_id" = "FlightLabKpi".public."public.Ticket"."flight_id"')
+                'SELECT "FlightLabKpi".public."public.Ticket".ticket_id, "FlightLabKpi".public."public.Ticket"."seat_number", "FlightLabKpi".public."public.Ticket"."purchase_date", "FlightLabKpi".public."public.Ticket"."user_id", "FlightLabKpi".public."public.Ticket"."flight_id", "FlightLabKpi".public."public.Flight"."departure_time", "FlightLabKpi".public."public.Flight"."origin", "FlightLabKpi".public."public.Flight"."destination","FlightLabKpi".public."public.Ticket"."ticket_type","FlightLabKpi".public."public.Ticket"."price","FlightLabKpi".public."public.Ticket"."is_active" FROM "FlightLabKpi".public."public.Ticket" INNER JOIN "FlightLabKpi".public."public.Flight" ON "FlightLabKpi".public."public.Flight"."flight_id" = "FlightLabKpi".public."public.Ticket"."flight_id"')
             rows = cursor.fetchall()
         return rows
 
